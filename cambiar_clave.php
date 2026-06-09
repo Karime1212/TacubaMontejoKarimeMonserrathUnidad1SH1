@@ -6,7 +6,7 @@ $msg = "";
 $tipo_alert = "danger";
 $mostrar_formulario = false;
 
-// Verificación estricta de seguridad: el token de la URL debe coincidir con el guardado en la sesión
+
 if(isset($_GET['token']) && isset($_SESSION['token_recuperacion']) && $_GET['token'] === $_SESSION['token_recuperacion']){
     $mostrar_formulario = true;
 } else {
@@ -21,18 +21,14 @@ if(isset($_POST['actualizar']) && $mostrar_formulario){
     if(!empty($nueva_clave) && !empty($confirmar_clave)){
         if($nueva_clave === $confirmar_clave){
             
-            // Generación en tiempo real de los hashes estático e híbrido requeridos
             $sha = hash('sha256', $nueva_clave);
             $bcrypt = password_hash($nueva_clave, PASSWORD_DEFAULT);
 
-            // Actualización directa de la base de datos mediante sentencias preparadas de PDO
             $stmt = $cnnPDO->prepare("UPDATE usuarixs SET sha = :sha, bcrypt = :bcrypt WHERE correo = :cor");
             $stmt->bindParam(':sha', $sha);
             $stmt->bindParam(':bcrypt', $bcrypt);
             $stmt->bindParam(':cor', $correo);
             $stmt->execute();
-
-            // Destrucción de las variables de control de la sesión por seguridad
             unset($_SESSION['token_recuperacion']);
             unset($_SESSION['correo_recuperacion']);
 
@@ -40,7 +36,6 @@ if(isset($_POST['actualizar']) && $mostrar_formulario){
             $tipo_alert = "success";
             $mostrar_formulario = false;
 
-            // Redirección automática al index.php tras 3 segundos
             header("refresh:3;url=index.php");
         } else {
             $msg = "Error: Las contraseñas ingresadas no coinciden.";

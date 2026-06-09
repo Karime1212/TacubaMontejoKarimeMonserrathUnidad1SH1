@@ -19,7 +19,6 @@ if(isset($_POST['recuperar'])){
             $_SESSION['token_recuperacion'] = $token;
             $_SESSION['correo_recuperacion'] = $correo;
 
-            // Construcción automática compatible con XAMPP y con InfinityFree
             $protocolo = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? "https://" : "http://";
             $enlace = $protocolo . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . "/cambiar_clave.php?token=" . $token;
 

@@ -1,7 +1,5 @@
 <?php
 session_start();
-
-// Validación de sesión: si no existe la sesión del usuario, se le regresa al index
 if(!isset($_SESSION['nombre'])){
     header("Location: index.php");
     exit();
@@ -10,7 +8,6 @@ if(!isset($_SESSION['nombre'])){
 require_once 'bdconexion.php';
 
 try {
-    // Consulta para obtener todos los registros de la tabla usuarixs
     $lista = $cnnPDO->query("SELECT * FROM usuarixs");
 } catch (PDOException $e) {
     echo "Error al consultar los datos: " . $e->getMessage();
@@ -28,7 +25,6 @@ try {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="estilos.css?v=<?php echo time(); ?>">
     <script>
-        // Evitar que el usuario regrese con el botón "Atrás" del navegador después de cerrar sesión
         history.pushState(null, null, location.href);
         window.onpopstate = function () {
             history.go(1);

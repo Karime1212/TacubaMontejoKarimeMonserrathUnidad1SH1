@@ -11,10 +11,9 @@
 <body style="background: #d9d9d9; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px;">
 
 <div class="principal text-center">
-    <!-- Contenedor con la misma clase estilizada de tu login -->
+
     <div class="caja p-5 text-white">
         <div class="mb-4">
-            <!-- Icono grande de advertencia usando el color verde de tu tema -->
             <i class="fa-solid fa-triangle-exclamation display-1" style="color: #0ac18e;"></i>
         </div>
         
@@ -29,7 +28,6 @@
         </p>
         
         <div class="botones">
-            <!-- Botón interactivo para regresar al formulario inicial -->
             <a href="index.php" class="btnreg d-flex align-items-center justify-content-center text-decoration-none">
                 <i class="fa-solid fa-arrow-left me-2"></i> Volver al Inicio
             </a>
